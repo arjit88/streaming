@@ -40,11 +40,11 @@ const VideoList = ({ video }) => {
             </span>
           </div>
 
-          <div className="flex mt-3">
-            <div className="flex items-center">
+          <div className="flex mt-1">
+            <div className="flex mt-1">
               <div className="flex h-9 w-9 rounded-full overflow-hidden">
                 <img
-                  className="w-full h-full object-cover rounded-md mb-2"
+                  className="w-full h-full object-cover rounded-md"
                   src={channelData?.snippet?.thumbnails?.medium?.url}
                   alt={channelData?.snippet?.title}
                 />
@@ -52,16 +52,16 @@ const VideoList = ({ video }) => {
             </div>
 
             <div
-              className={`flex flex-col ml-3 overflow-hidden ${
+              className={`flex flex-col ml-2 overflow-hidden ${
                 isDarkMode
                   ? "bg-gray-900 text-gray-300"
                   : "bg-white text-gray-800"
               }`}
             >
-              <h3 className="text-md font-bold">{video?.snippet?.title}</h3>
+              <h3 className="text-lg font-semibold">{video?.snippet?.title}</h3>
 
               <div
-                className={`text-xs ${
+                className={`text-md font-semibold ${
                   isDarkMode ? "text-gray-400" : "text-gray-600"
                 }`}
               >
@@ -69,7 +69,7 @@ const VideoList = ({ video }) => {
               </div>
 
               <div
-                className={`text-xs ${
+                className={`text-md font-semibold ${
                   isDarkMode ? "text-gray-400" : "text-gray-600"
                 }`}
               >

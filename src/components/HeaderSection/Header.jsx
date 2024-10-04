@@ -41,7 +41,7 @@ const Header = () => {
 
       <div className="flex h-5 items-center">
         <div
-          className={`flex md:hidden md:mr-6 cursor-pointer items-center justify-center h-9 w-9 rounded-full hover:bg-${
+          className={`flex mr-2 md:hidden md:mr-6 cursor-pointer items-center justify-center h-9 w-9 rounded-full hover:bg-${
             isDarkMode ? "gray-700" : "gray-300"
           }`}
           onClick={mobileToggleMenu}

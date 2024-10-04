@@ -22,9 +22,9 @@ const Sidebar = () => {
     <div
       className={`md:block overflow-y-auto h-full py-4 w-[300px] mt-2 absolute md:relative z-10 ${
         mobileMenu ? "block" : "hidden"
-      } ${isDarkMode ? "border-gray-700" : "border-gray-200"} ${
-        mobileMenu ? "z-10" : "z-auto"
-      }`}
+      } ${
+        isDarkMode ? "bg-gray-900 border-gray-700" : "bg-white border-gray-200"
+      } ${mobileMenu ? "z-10" : "z-auto"}`}
     >
       <div className="flex flex-col px-5 mb-20">
         {categories.map((item) => (
