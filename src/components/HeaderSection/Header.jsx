@@ -5,10 +5,10 @@ import Loader from "../../utils/Loader";
 import { CgClose } from "react-icons/cg";
 import { SlMenu } from "react-icons/sl";
 import { Link, useNavigate } from "react-router-dom";
-import { IoIosSearch, IoMdMic, IoMdMicOff } from "react-icons/io";
+import { IoMdMic, IoMdMicOff } from "react-icons/io";
 import { MdVideoCall } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
-import { FiMoon, FiSun } from "react-icons/fi";
+import { FiMoon, FiSearch, FiSun } from "react-icons/fi";
 import { IoPersonCircle } from "react-icons/io5";
 
 const Header = () => {
@@ -123,7 +123,7 @@ const Header = () => {
           }`}
         >
           <div className="w-10 items-center justify-center hidden group-focus-within:md:flex">
-            <IoIosSearch className="text-xl" />
+            <FiSearch className="text-xl" />
           </div>
           <input
             type="text"
@@ -153,7 +153,7 @@ const Header = () => {
           } bg-${isDarkMode ? "gray-700" : "gray-100"}`}
           onClick={handleSearchQuerry}
         >
-          <IoIosSearch className="text-xl" />
+          <FiSearch className="text-xl" />
         </button>
 
         <button

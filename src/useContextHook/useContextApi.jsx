@@ -1,23 +1,22 @@
-import { createContext, useState } from "react";
-import { useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import { fetchApiForYoutubeData } from "../utils/fetchApi";
-import { useEffect } from "react";
 
 export const Context = createContext();
 
 export const AppContext = ({ children }) => {
   const [selectedCategory, setSelectedCategory] = useState("0");
   const [loading, setLoading] = useState(false);
-  const [videoData, SetVideoData] = useState([]);
+  const [videoData, setVideoData] = useState([]);
   const [mobileMenu, setMobileMenu] = useState(false);
 
   const fetchYoutubeData = async (params) => {
     setLoading(true);
     try {
-      const res = fetchApiForYoutubeData("videos", params);
-      SetVideoData(res.items);
+      const res = await fetchApiForYoutubeData("videos", params);
+      setVideoData(res.items);
+      // console.log(res.items);
     } catch (error) {
-      console.error(error, "Error fetching youtube results");
+      console.error(error, "Error fetching YouTube results");
     } finally {
       setLoading(false);
     }
