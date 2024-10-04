@@ -13,10 +13,15 @@ export const AppContext = ({ children }) => {
     setLoading(true);
     try {
       const res = await fetchApiForYoutubeData("videos", params);
-      setVideoData(res.items);
-      // console.log(res.items);
+
+      if (res && res.items) {
+        setVideoData(res.items);
+      } else {
+        console.error("No items found in the response:", res);
+        setVideoData([]); // Clear video data if no items found
+      }
     } catch (error) {
-      console.error(error, "Error fetching YouTube results");
+      console.error("Error fetching YouTube results:", error);
     } finally {
       setLoading(false);
     }
@@ -24,9 +29,10 @@ export const AppContext = ({ children }) => {
 
   useEffect(() => {
     if (selectedCategory) {
-      if (selectedCategory === "Home") {
+      if (selectedCategory === "0") {
         fetchYoutubeData({
           part: "snippet,contentDetails,statistics",
+          chart: "mostPopular",
           regionCode: "IN",
           maxResults: 10,
         });
