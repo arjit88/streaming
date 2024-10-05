@@ -1,6 +1,9 @@
 import { formatDistanceToNow } from "date-fns";
 
 export const formatViewCount = (count) => {
+  if (typeof count !== "number" || isNaN(count)) {
+    return "0"; // Return a default value if count is invalid
+  }
   if (count >= 1000000) {
     return (count / 1000000).toFixed(1) + "M";
   } else if (count >= 1000) {

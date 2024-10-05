@@ -3,7 +3,7 @@ import { useAppContext } from "../../useContextHook/useContextApi";
 import { useTheme } from "../../useContextHook/useTheme";
 import MenuItems from "./MenuItems";
 import { categories, menuItems } from "../../utils/Constant";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = () => {
   const { mobileMenu, selectedCategory, setSelectedCategory } = useAppContext();
@@ -52,9 +52,13 @@ const Sidebar = () => {
           }`}
         />
 
-        <div className="flex items-center text-sm justify-center">
+        <Link
+          to={"https://github.com/arjit88"}
+          target="_blank"
+          className="flex items-center text-sm justify-center hover:underline"
+        >
           Made by Arjit Anand
-        </div>
+        </Link>
       </div>
     </div>
   );
