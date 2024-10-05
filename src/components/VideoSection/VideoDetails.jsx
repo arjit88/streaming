@@ -7,6 +7,8 @@ import { formatPublishTime, formatViewCount } from "../../utils/helper";
 import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
 import { PiShareFat } from "react-icons/pi";
 import { MdOutlineContentCut } from "react-icons/md";
+import VideoComments from "./VideoComments";
+import RelatedVideos from "./RelatedVideos";
 
 const VideoDetails = () => {
   const { categoryId, videoId } = useParams();
@@ -238,7 +240,29 @@ const VideoDetails = () => {
             </div>
           )}
 
-          <div className="mt-8"></div>
+          <div className="mt-8">
+            <p
+              className={`${
+                isDarkMode ? "text-gray-200" : "text-black"
+              } font-semibold text-lg`}
+            >
+              {selectedVideoDetails?.statistics?.commentCount
+                ? formatViewCount(
+                    Number(selectedVideoDetails.statistics.commentCount)
+                  )
+                : "Comment unavailable"}{" "}
+              Comments
+            </p>
+          </div>
+
+          {commentData?.map((comment) => (
+            <VideoComments key={comment.id} comment={comment} />
+          ))}
+        </div>
+
+        <div className="lg:w-[30%] p-4">
+          <h3 className="text-xl font-bold mb-4">Related Videos</h3>
+          <RelatedVideos />
         </div>
       </div>
     </div>
