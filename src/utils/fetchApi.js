@@ -11,7 +11,6 @@ export const fetchApiForYoutubeData = async (endpoints, params) => {
         key: API_KEY,
       },
     });
-    // console.log("response", response.data);
     return response.data;
   } catch (error) {
     console.error(error, "Error fetching Youtube data");

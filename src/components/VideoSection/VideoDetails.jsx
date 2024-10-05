@@ -262,7 +262,7 @@ const VideoDetails = () => {
 
         <div className="lg:w-[30%] p-4">
           <h3 className="text-xl font-bold mb-4">Related Videos</h3>
-          <RelatedVideos />
+          <RelatedVideos categoryId={categoryId} />
         </div>
       </div>
     </div>
