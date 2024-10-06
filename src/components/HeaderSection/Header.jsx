@@ -139,7 +139,7 @@ const Header = () => {
           />
           {searchQuery && (
             <button
-              className="absolute right-32 top-1/2 transform -translate-y-1/2"
+              className="absolute right-24 md:right-36 top-1/2 transform -translate-y-1/2"
               onClick={handleClearSearchQuerry}
             >
               <CgClose className="text-xl" />
@@ -159,7 +159,7 @@ const Header = () => {
         <button
           className={`flex items-center justify-center w-[40px] md:w-[60px] h-8 md:h-10 rounded-full hover:bg-${
             isDarkMode ? "gray-700" : "gray-300"
-          }`}
+          } ml-2`}
         >
           {/* <IoMdMicOff className="text-xl" /> */}
           <IoMdMic className="text-xl" />
