@@ -57,20 +57,26 @@ const SearchVideoResult = () => {
         <div className="p-4">
           {searchResult?.map((result) => (
             <div key={result.id} className="flex flex-col md:flex-row mb-8">
-              <Link to={`/video/${result?.snippet?.categoryId}/${result?.id}`}>
+              <Link
+                to={`/video/${result?.snippet?.categoryId}/${result?.id}`}
+                className="w-full md:w-1/3"
+              >
                 <img
-                  src={result?.snippet?.thumbnails?.medium?.url}
+                  src={result?.snippet?.thumbnails?.high?.url}
                   alt={result?.snippet?.title}
-                  className="w-full h-full object-cover rounded-md mb-2"
+                  className="w-full h-auto object-cover rounded-md mb-4" // Use h-auto for consistent aspect ratio
                 />
               </Link>
 
               <div className="md:ml-4 md:w-2/3">
-                <h3 className="text-lg font-bold">{result?.snippet?.title}</h3>
+                <h3 className="text-lg font-bold mb-2 truncate">
+                  {result?.snippet?.title}
+                </h3>
+
                 <div
                   className={`text-sm ${
                     isDarkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
+                  } mb-1 truncate`}
                 >
                   {result?.snippet?.channelTitle}
                 </div>
@@ -78,7 +84,7 @@ const SearchVideoResult = () => {
                 <div
                   className={`text-xs ${
                     isDarkMode ? "text-gray-400" : "text-gray-600"
-                  }`}
+                  } mb-2`}
                 >
                   {result?.statistics?.viewCount
                     ? formatViewCount(Number(result.statistics.viewCount))
@@ -86,7 +92,7 @@ const SearchVideoResult = () => {
                   views . {formatPublishTime(result?.snippet?.publishedAt)}
                 </div>
 
-                <p className="mt-2">
+                <p className="mt-2 line-clamp-2">
                   {result?.snippet?.description.slice(0, 100)}
                 </p>
               </div>

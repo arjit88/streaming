@@ -6,6 +6,8 @@ import SearchVideoResult from "./components/SearchSection/SearchVideoResult";
 import VideoDetails from "./components/VideoSection/VideoDetails";
 import { AppContext } from "./useContextHook/useContextApi";
 import { ThemeProvider } from "./useContextHook/useTheme";
+import ChannelDetails from "./channel/ChannelDetails";
+import PlaylistDetails from "./channel/PlayListDetails";
 
 function App() {
   return (
@@ -23,6 +25,11 @@ function App() {
               <Route
                 path="/video/:categoryId/:videoId"
                 element={<VideoDetails />}
+              />
+              <Route path="/channel/:channelId" element={<ChannelDetails />} />
+              <Route
+                path="/playlist/:playlistId"
+                element={<PlaylistDetails />}
               />
             </Routes>
           </div>

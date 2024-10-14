@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useAppContext } from "../../useContextHook/useContextApi";
 import { useTheme } from "../../useContextHook/useTheme";
 import { fetchApiForYoutubeData } from "../../utils/fetchApi";
@@ -62,7 +62,7 @@ const VideoDetails = () => {
       });
       setCommentData(data?.items);
     } catch (error) {
-      console.error(error, "Error fetching channel data");
+      console.error(error, "Error fetching comments");
     } finally {
       setLoading(false);
     }
@@ -83,6 +83,7 @@ const VideoDetails = () => {
 
   const description = selectedVideoDetails?.snippet?.description;
   const truncatedDescription = description?.slice(0, 240);
+
   return (
     <div
       className={`flex justify-center flex-row h-full ${
@@ -112,17 +113,20 @@ const VideoDetails = () => {
               </h2>
               <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                 <div className="flex items-center mb-4 lg:mb-0">
-                  <img
-                    src={channelData?.snippet?.thumbnails?.default?.url}
-                    alt={channelData?.snippet?.title}
-                    className="w-12 h-12 rounded-full"
-                  />
+                  <Link to={`/channel/${channelData?.id}`}>
+                    <img
+                      src={channelData?.snippet?.thumbnails?.default?.url}
+                      alt={channelData?.snippet?.title}
+                      className="w-12 h-12 rounded-full cursor-pointer"
+                    />
+                  </Link>
 
                   <div className="mt-2 ml-2 lg:mt-0">
-                    <h3 className="text-lg font-semibold">
-                      {channelData?.snippet?.title}
-                    </h3>
-
+                    <Link to={`/channel/${channelData?.id}`}>
+                      <h3 className="text-lg font-semibold cursor-pointer">
+                        {channelData?.snippet?.title}
+                      </h3>
+                    </Link>
                     <p
                       className={`font-medium text-sm ${
                         isDarkMode ? "text-gray-200" : "text-gray-700"
@@ -210,11 +214,11 @@ const VideoDetails = () => {
               </div>
 
               <div
-                className={` ${
+                className={`${
                   isDarkMode
                     ? "text-white bg-gray-800"
                     : "text-black bg-slate-200"
-                }  rounded-xl p-4`}
+                } rounded-xl p-4`}
               >
                 <p>
                   {selectedVideoDetails?.statistics?.viewCount

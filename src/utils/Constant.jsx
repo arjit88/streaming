@@ -20,7 +20,6 @@ export const categories = [
   { id: "10", name: "Music", icon: <CgMusicNote />, type: "category" },
   { id: "15", name: "Pets & Animals", icon: <GiCat />, type: "category" },
   { id: "17", name: "Sports", icon: <GiSoccerBall />, type: "category" },
-  { id: "19", name: "Travel & Events", icon: <MdFlight />, type: "category" },
   {
     id: "20",
     name: "Gaming",
@@ -48,7 +47,6 @@ export const categories = [
     type: "category",
   },
   { id: "26", name: "Howto & Style", icon: <FaTools />, type: "category" },
-  { id: "27", name: "Education", icon: <MdSchool />, type: "category" },
   {
     id: "28",
     name: "Science & Technology",

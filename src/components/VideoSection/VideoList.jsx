@@ -7,10 +7,12 @@ import {
   formatViewCount,
 } from "../../utils/helper";
 import { fetchApiForYoutubeData } from "../../utils/fetchApi";
+import Skeleton from "../Skeleton/Skeleton";
 
 const VideoList = ({ video }) => {
   const { isDarkMode } = useTheme();
   const [channelData, setChannelData] = useState();
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const fetchChannelData = async () => {
     const data = await fetchApiForYoutubeData(`channels`, {
@@ -18,11 +20,16 @@ const VideoList = ({ video }) => {
       id: video?.snippet?.channelId,
     });
     setChannelData(data?.items[0]);
+    setLoading(false); // Set loading to false once data is fetched
   };
 
   useEffect(() => {
     fetchChannelData();
   }, [video]);
+
+  if (loading) {
+    return <Skeleton />; // Show skeleton while loading
+  }
 
   return (
     <div>
@@ -34,7 +41,6 @@ const VideoList = ({ video }) => {
               src={video?.snippet?.thumbnails?.maxres?.url}
               alt={video.snippet.title}
             />
-
             <span className="absolute bottom-4 right-0 bg-gray-900 text-white text-xs p-1 m-1 rounded">
               {formatDuration(video?.contentDetails.duration)}
             </span>

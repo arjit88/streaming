@@ -10,12 +10,23 @@ import { MdVideoCall } from "react-icons/md";
 import { FaBell } from "react-icons/fa";
 import { FiMoon, FiSearch, FiSun } from "react-icons/fi";
 import { IoPersonCircle } from "react-icons/io5";
+import useSpeechRecognitions from "../../useContextHook/UseSpeechRecognition";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const { loading, mobileMenu, setMobileMenu } = useAppContext();
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const {
+    listening,
+    stopListening,
+    startListening,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognitions(setSearchQuery);
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser doesn't support speech recognition.</span>;
+  }
 
   const handleSearchQuerry = () => {
     if (searchQuery?.length > 0) {
@@ -160,9 +171,19 @@ const Header = () => {
           className={`flex items-center justify-center w-[40px] md:w-[60px] h-8 md:h-10 rounded-full hover:bg-${
             isDarkMode ? "gray-700" : "gray-300"
           } ml-2`}
+          onClick={() => {
+            if (listening) {
+              stopListening();
+            } else {
+              startListening();
+            }
+          }}
         >
-          {/* <IoMdMicOff className="text-xl" /> */}
-          <IoMdMic className="text-xl" />
+          {listening ? (
+            <IoMdMicOff className="text-xl" />
+          ) : (
+            <IoMdMic className="text-xl" />
+          )}
         </button>
       </div>
 
