@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
-const API_KEY = "AIzaSyDo4YS2ITCWmlnHBxfzr1pjSi0e9z21xTI";
+const API_KEY = import.meta.env.VITE_API_KEY;
 const CACHE_DURATION = 60 * 60 * 1000; // Cache duration set to 1 hour
 
 export const fetchApiForYoutubeData = async (endpoints, params) => {

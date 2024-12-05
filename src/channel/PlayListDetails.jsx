@@ -7,7 +7,7 @@ import Sidebar from "../components/SidebarSection/Sidebar";
 
 const PlaylistDetails = () => {
   const { playlistId } = useParams();
-  const { isDarkMode } = useTheme(); // Use the theme context
+  const { isDarkMode } = useTheme();
   const [playlistData, setPlaylistData] = useState([]);
   const [relatedVideos, setRelatedVideos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,14 +15,12 @@ const PlaylistDetails = () => {
   const fetchPlaylistVideos = async () => {
     setLoading(true);
     try {
-      // Fetch playlist items
       const data = await fetchApiForYoutubeData("playlistItems", {
         part: "snippet",
         playlistId: playlistId,
         maxResults: 10,
       });
 
-      // Map video IDs to fetch detailed statistics
       const videoIds = data.items
         .map((item) => item.snippet.resourceId.videoId)
         .join(",");
@@ -31,14 +29,14 @@ const PlaylistDetails = () => {
         id: videoIds,
       });
 
-      // Combine playlist items with video statistics
       const combinedData = data.items.map((item) => {
         const videoDetail = videoDetails.items.find(
           (video) => video.id === item.snippet.resourceId.videoId
         );
         return {
           ...item.snippet,
-          statistics: videoDetail?.statistics, // Use optional chaining to avoid undefined errors
+          statistics: videoDetail?.statistics,
+          categoryId: videoDetail?.snippet?.categoryId, // Extract categoryId here
         };
       });
 
@@ -68,7 +66,6 @@ const PlaylistDetails = () => {
     fetchPlaylistVideos();
   }, [playlistId]);
 
-  // Fetch related videos for the first video in the playlist if available
   useEffect(() => {
     if (playlistData.length > 0) {
       fetchRelatedVideos(playlistData[0].resourceId.videoId);
@@ -90,8 +87,6 @@ const PlaylistDetails = () => {
           <Sidebar />
         </div>
         <div className="flex-1 p-4">
-          {" "}
-          {/* Use flex-1 for content area */}
           <h1 className="text-2xl font-bold mb-4">Playlist Videos</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {playlistData.map((video) => (
@@ -124,14 +119,13 @@ const PlaylistDetails = () => {
               </Link>
             ))}
           </div>
-          {/* Related Videos Section */}
           {relatedVideos.length > 0 && (
             <div className="mt-6">
               <h2 className="text-xl font-bold">Related Videos</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {relatedVideos.map((video) => (
                   <Link
-                    to={`/video/${video.id.videoId}`} // Adjust based on your route
+                    to={`/video/${playlistData[0]?.categoryId}/${video.id.videoId}`} // Use the categoryId from the first video in the playlist
                     key={video.id.videoId}
                   >
                     <div
